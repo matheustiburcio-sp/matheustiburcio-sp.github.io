@@ -910,7 +910,7 @@ body {
         --color-title: #3e1b1b;
         --panel-strong: linear-gradient(to right, #1f1815b0, #27191469, #41342e42, #a5857813);
         --panel-soft: linear-gradient(to right, #201a18d8, #3a302c48, #72625a18, #a5857813);
-        --nav-bg: linear-gradient(to right, #332419b9, #1d19168e, #3d312b18, #a58578a4);
+        --nav-bg: linear-gradient(to right, #332419b9, #1d19168e, #3d312b18, #1a100dd7);
         --shadow-soft: 0 10px 26px #0000002b;
     }
 
@@ -1273,6 +1273,24 @@ body {
     }
 
     /* ---- PC Projetos ---- */
+
+    .pc-projects-grid .pc-project-card:nth-child(4),
+        .pc-projects-grid .pc-project-card:nth-child(5) {
+         grid-column: auto;
+    }   
+
+    .pc-projects-grid:has(> :nth-child(5):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .pc-projects-grid .pc-project-card:nth-child(4) {
+    grid-column: 1 / 2;
+    }
+
+    .pc-projects-grid .pc-project-card:nth-child(5) {
+    grid-column: 2 / 3;
+    }
+
     .pc-projects-section {
         min-height: 100vh;
         width: 100%;
@@ -1304,7 +1322,7 @@ body {
         min-height: 320px;
         padding: clamp(20px, 2vw, 28px) clamp(16px, 2vw, 24px);
         border-radius: 18px;
-        background: linear-gradient(to right, #2b201aa3, #241a1594, #3a2a225c);
+        background: linear-gradient(to right, #2b201aa3, #18110ece, #201814b4);
         border: 1px solid #d4a57a36;
         box-shadow: var(--shadow-soft);
         transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -1352,7 +1370,7 @@ body {
         font-family: var(--font-body);
         font-size: clamp(13px, 1.1vw, 16px);
         line-height: 1.75;
-        color: rgba(240, 226, 212, 0.85);
+        color: rgba(255, 255, 255, 0.85);
         margin-bottom: 18px;
         flex: 1;
     }
@@ -1431,305 +1449,559 @@ body {
         transform: translateX(3px);
     }
 
-    /* ---- PC Educação ---- */
-    .pc-education-section {
-        position: relative;
-        min-height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 40px;
-        padding: 80px 60px 60px;
-        background: url("assets/images/imagem.baixo.png") top/cover no-repeat;
-    }
+   /* ============================================
+   PC SKILLS SECTION
+   Substitui: .pc-education-section e todo .pc-edu-*
+   Adicione dentro do bloco @media (min-width: 900px)
+   ============================================ */
 
-    .pc-edu-cards-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        width: min(1100px, 100%);
-    }
-
-    .pc-edu-card {
-        display: flex;
-        flex-direction: column;
-        background: #1a1815;
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-radius: 16px;
-        overflow: hidden;
-        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
-    }
-
-    .pc-edu-card:hover {
-        transform: scale(1.02);
-        border-color: rgba(196, 164, 106, 0.35);
-        box-shadow: 0 8px 36px rgba(0, 0, 0, 0.65);
-    }
-
-    .pc-edu-card-body {
-        display: flex;
-        flex-direction: row;
-        flex: 1;
-    }
-
-    .pc-edu-img-wrap {
-        flex: 0 0 220px; /* ↓ era 260px */
-        overflow: hidden;
-        background: #111;
-    }
-
-    .pc-edu-img {
-        width: 100%;
-        height: 100%;
-        min-height: 220px; /* ↓ era 260px */
-        object-fit: cover;
-        display: block;
-    }
-
-    .pc-edu-img--logo {
-        object-fit: contain;
-        background: #ffd700;
-        padding: 20px;
-    }
-
-    .pc-edu-card-info {
-        flex: 1;
-        padding: 20px 18px; /* ↓ era 24px 22px */
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .pc-edu-badge {
-        width: 40px; /* ↓ era 44px */
-        height: 40px;
-        border-radius: 50%;
-        border: 1px solid rgba(196, 164, 106, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #c4a46a;
-        font-size: 16px; /* ↓ era 18px */
-        flex-shrink: 0;
-    }
-
-    .pc-edu-name {
-        font-family: var(--font-title);
-        font-size: clamp(16px, 1.6vw, 22px); /* ↓ era 22px fixo */
-        font-weight: 900;
-        color: #ffffff;
-        text-transform: uppercase;
-        line-height: 1.2;
-        margin: 0;
-    }
-
-    .pc-edu-type {
-        font-family: var(--font-body);
-        font-size: clamp(12px, 1vw, 14px); /* ↓ era 14px fixo */
-        color: #c4a46a;
-        margin: 0;
-    }
-
-    .pc-edu-rule {
-        width: 30px;
-        height: 2px;
-        background: #c4a46a;
-        border-radius: 1px;
-    }
-
-    .pc-edu-desc {
-        font-family: var(--font-body);
-        font-size: clamp(12px, 1vw, 14px); /* ↓ era 14px fixo */
-        color: rgb(255, 255, 255);
-        line-height: 1.65;
-        margin: 0;
-    }
-
-    .pc-edu-foot {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px 18px;
-        border-top: 1px solid rgba(255, 255, 255, 0.07);
-        background: rgba(255, 255, 255, 0.02);
-        font-family: var(--font-body);
-        font-size: clamp(11px, 1vw, 13px); /* ↓ era 13px fixo */
-        color: rgb(255, 255, 255);
-    }
-
-    .pc-edu-foot i {
-        color: #c4a46a;
-        font-size: 14px;
-        flex-shrink: 0;
-    }
-
-    .pc-edu-foot-label {
-        color: #c4a46a;
-        font-weight: 600;
-    }
-
-    .pc-edu-quote {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        margin-bottom: clamp(-40px, -6vw, -100px); /* ↓ era -100px fixo */
-        padding: 14px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        width: min(1100px, 100%);
-        font-family: var(--font-body);
-        font-size: clamp(13px, 1.1vw, 15px); /* ↓ era 15px fixo */
-        color: rgb(255, 255, 255);
-        font-weight: 700;
-        font-style: italic;
-    }
-
-    .pc-edu-quote i {
-        color: #c4a46a;
-        font-size: 24px; /* ↓ era 26px */
-        flex-shrink: 0;
-    }
-
-    .pc-education-section .edu-section-header {
-    max-width: 1000px;
+.pc-skills-section {
+    position: relative;
+    min-height: 100vh;
     width: 100%;
-    padding: 0 0 8px;
-    margin-top: 0;
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 100px 60px 80px;
+    background: url("assets/images/imagem.baixo.png") top/cover no-repeat;
+}
+
+/* ---- Cabeçalho ---- */
+.pc-skills-header {
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: clamp(140px, 20vh, 120px); /* controla o espaço entre título e subtítulo */
+    align-items: center;
+    gap: 14px;
+    width: 100%;
 }
 
-    .pc-education-section .edu-section-title {
+.pc-skills-title {
+    font-family: var(--font-ui);
     font-size: clamp(24px, 3vw, 48px);
     color: var(--color-title);
-    margin-top: 0;
-    margin-bottom: 0;
-    transform: translateY(-50px); /* sobe 50px sem afetar o fluxo dos elementos abaixo */
-}
+    margin: 0px;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
 }
 
-    .pc-education-section .edu-section-subtitle {
+.pc-skills-subtitle {
+    font-family: var(--font-body);
     font-size: clamp(13px, 1.2vw, 17px);
-    margin-top: 0;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
+    font-style: italic;
+    max-width: 620px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ---- Grid de categorias ---- */
+.pc-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: min(1400px, 100%);
+    padding-top: 100px;
+}   
+
+
+/* ---- Card de categoria ---- */
+.pc-skill-category {
+    background: linear-gradient(to bottom, #1e1916cc, #151210cc);
+    border: 1px solid rgba(196, 164, 106, 0.18);
+    border-radius: 18px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pc-skill-category:hover {
+    border-color: rgba(196, 164, 106, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Label da categoria ---- */
+.pc-skill-category-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-ui);
+    font-size: clamp(9px, 0.85vw, 12px);
+    color: #c4a46a;
+    letter-spacing: 1px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(196, 164, 106, 0.2);
+}
+
+.pc-skill-category-label i {
+    font-size: 15px;
+    opacity: 0.85;
+}
+
+/* ---- Items dentro da categoria ---- */
+.pc-skill-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pc-skill-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    cursor: default;
+}
+
+.pc-skill-item:hover {
+    background: rgba(196, 164, 106, 0.08);
+    border-color: rgba(196, 164, 106, 0.25);
+    transform: translateX(4px);
+}
+
+.pc-skill-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Badge TS inline (mesmo estilo do hero) */
+.pc-skill-icon-ts {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    background: #3178c6;
+    font-size: 9px;
+    font-weight: 800;
+    color: #fff;
+    font-family: sans-serif;
+    flex-shrink: 0;
+}
+
+.pc-skill-name {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.1vw, 15px);
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+}
+
+/* ---- Quote rodapé ---- */
+.pc-skills-quote {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    width: min(1100px, 100%);
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.1vw, 15px);
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 700;
     font-style: italic;
 }
 
-    /* ---- PC Contato ---- */
-    .pc-contact-section {
-        position: relative;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: url("assets/images/imagem.baixo.png") top/cover no-repeat;
+.pc-skills-quote i {
+    color: #c4a46a;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+/* ---- Responsivo notebooks até 1366px ---- */
+@media (max-width: 1366px) {
+    .pc-skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .pc-contato1 {
-        position: absolute;
-        top: clamp(60px, 8vh, 90px);
-        left: 0;
-        right: 0;
-        text-align: center;
-        font-family: var(--font-ui);
-        font-size: clamp(20px, 3vw, 48px);
-        color: var(--color-title);
-        font-weight: 400;
-        white-space: normal;
-        padding: 0 20px;
-        pointer-events: none;
+    /* Coloca Design & Ferramentas centralizado quando sobra sozinho */
+    .pc-skill-category:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: 500px;
+        margin: 0 auto;
     }
+}
 
-    .pc-contact-section .pc-page-layout {
-        justify-content: center;
-    }
+/* ============================================
+   PC CONTACT SECTION — versão final
+   Substitui todo o bloco .pc-contact-*
+   Cole dentro do @media (min-width: 900px)
+   ============================================ */
 
-    .pc-contact-box {
-        display: flex;
-        flex-direction: column;
-        gap: clamp(14px, 1.5vw, 20px); /* ↓ era 20px fixo */
-        padding: clamp(24px, 3vw, 40px) clamp(28px, 4vw, 50px); /* ↓ era 40px 50px fixo */
-        border-radius: 20px;
-        background: var(--panel-strong);
-    }
+.pc-contact-section {
+    position: relative;
+    min-height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 100px 60px 80px;
+    background: url("assets/images/imagem.baixo.png") top/cover no-repeat;
+}
 
-    .pc-contact-item {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 14px;
-        font-family: var(--font-body);
-        font-size: clamp(14px, 1.2vw, 18px);
-        color: var(--color-white);
-        padding-bottom: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
+/* ---- Cabeçalho ---- */
+.pc-contact-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
 
-    .pc-contact-item:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
+.pc-contact-pretitle {
+    font-family: var(--font-ui);
+    font-size: clamp(4px, 2.2vw, 56px);
+    color: var(--color-title);
+    margin: 0;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
 
-    .pc-contact-item strong {
-        color: rgba(196, 164, 106, 0.8);
-        font-weight: 600;
-        min-width: 80px;
-        display: inline-block;
-    }
+.pc-contact-title {
+    font-family: var(--font-title);
+    font-size: clamp(28px, 3.5vw, 52px);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+    margin-top: clamp(50px, 8vw, 150px);
+}
 
-    .pc-contact-item a {
-        color: var(--color-link);
-        text-decoration: none;
-        word-break: break-word;
-        transition: color 0.25s, text-underline-offset 0.25s;
-    }
+.pc-contact-title-accent {
+    color: #c4a46a;
+}
 
-    .pc-contact-item a:hover {
-        color: #f3c79f;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-    }
+.pc-contact-divider {
+    width: 40px;
+    height: 2px;
+    background: #c4a46a;
+    border-radius: 1px;
+}
 
-    .pc-contact-icon {
-        width: clamp(22px, 2vw, 28px); /* ↓ era 28px fixo */
-        height: clamp(22px, 2vw, 28px);
-        object-fit: contain;
-        flex-shrink: 0;
-    }
+.pc-contact-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.2vw, 17px);
+    color: rgb(255, 255, 255);
+    margin: 0;
+    line-height: 1.6;
+    max-width: 700px;
+    text-align: center;
+}
 
-    /* Notebooks até 1366px */
-    @media (max-width: 1366px) {
-        .pc-navbar {
-            padding: 14px 12px;
-        }
+.pc-contact-subtitle-link {
+    color: #c4a46a;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
 
-        .pc-navbar-links {
-            gap: clamp(30px, 4vw, 48px);
-        }
+.pc-contact-subtitle-link:hover {
+    color: #f3c79f;
+}
 
-        .pc-navbar-links a {
-            font-size: clamp(8px, 0.75vw, 10px);
-        }
+/* ---- Body: dois cards lado a lado ---- */
+.pc-contact-body {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 24px;
+    width: min(1400px, 100%);
+}
 
-        .pc-projects-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-    }
+/* ---- Cards ---- */
+.pc-contact-card {
+    background: rgba(26, 20, 14, 0.85);
+    border: 1px solid rgba(73, 64, 57, 0.801);
+    border-radius: 18px;
+    padding: 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-    /* Reduz motion quando preferido */
-    @media (prefers-reduced-motion: reduce) {
-        .pc-navbar-links a::after,
-        .pc-project-card,
-        .pc-project-links a::after {
-            transition: none !important;
-        }
-    }
+.pc-contact-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-title);
+    font-size: clamp(15px, 1.3vw, 18px);
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.pc-contact-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(196, 164, 106, 0.18);
+    border: 1px solid rgba(196, 164, 106, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c4a46a;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+/* ---- Itens de informação ---- */
+.pc-contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pc-contact-info-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.pc-contact-info-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(196, 164, 106, 0.18);
+    border: 1px solid rgba(196, 164, 106, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c4a46a;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.pc-contact-info-label {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 1vw, 14px);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 2px;
+}
+
+.pc-contact-info-value {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.95vw, 13px);
+    color: #c4a46a;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.pc-contact-info-value:hover {
+    color: #f3c79f;
+}
+
+.pc-contact-info-sublabel {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.9vw, 12px);
+    color: rgba(255, 255, 255, 0.45);
+    margin: 2px 0 0;
+}
+
+.pc-contact-ext-icon {
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* ---- Formulário ---- */
+.pc-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.pc-contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.pc-contact-input,
+.pc-contact-textarea {
+    width: 100%;
+    background: rgba(148, 127, 110, 0.075);
+    border: 2px solid rgba(63, 56, 45, 0.932);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: clamp(12px, 1vw, 14px);
+    color: rgba(255, 255, 255, 0.85);
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    box-sizing: border-box;
+}
+
+.pc-contact-input::placeholder,
+.pc-contact-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.644);
+}
+
+.pc-contact-input:focus,
+.pc-contact-textarea:focus {
+    border-color: rgba(92, 82, 67, 0.815);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.pc-contact-textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+.pc-contact-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.pc-contact-send-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: transparent;
+    border: 1px solid #d4a57a;
+    color: #d4a57a;
+    font-family: var(--font-ui);
+    font-size: clamp(9px, 0.8vw, 11px);
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    box-shadow: 0 0 16px rgba(212, 165, 122, 0.35);
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pc-contact-send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(212, 165, 122, 0.55);
+}
+
+/* ---- Rodapé redes sociais ---- */
+.pc-contact-footer {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 32px;
+    width: min(1400px, 100%);
+    background: rgba(26, 20, 14, 0.85);
+    border: 1px solid rgba(196, 164, 106, 0.15);
+    border-radius: 18px;
+    padding: 22px 28px;
+}
+
+.pc-contact-social-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pc-contact-social-left .pc-contact-card-icon {
+    background: rgba(196, 164, 106, 0.18);
+}
+
+.pc-contact-social-title {
+    font-family: var(--font-body);
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 2px;
+}
+
+.pc-contact-social-sub {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.9vw, 12px);
+    color: #c4a46a;
+    margin: 0;
+}
+
+.pc-contact-social-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.pc-contact-social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-body);
+    font-size: clamp(10px, 0.9vw, 12px);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.pc-contact-social-item i {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.pc-contact-social-item:hover {
+    color: #c4a46a;
+    transform: translateY(-2px);
+}
+
+.pc-contact-social-item:hover i {
+    border-color: rgba(196, 164, 106, 0.4);
+    background: rgba(196, 164, 106, 0.08);
+}
+
+.pc-contact-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(196, 164, 106, 0.06);
+    border: 1px solid #d4a57a;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 0 18px rgba(212, 165, 122, 0.3);
+}
+
+.pc-contact-cta .pc-contact-card-icon {
+    background: rgba(196, 164, 106, 0.18);
+}
+
+.pc-contact-cta-title {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 1vw, 14px);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 2px;
+    white-space: nowrap;
+}
+
+.pc-contact-cta-sub {
+    font-family: var(--font-body);
+    font-size: clamp(10px, 0.85vw, 12px);
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    max-width: 220px;
+    line-height: 1.4;
 }
