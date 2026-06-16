@@ -908,8 +908,8 @@ body {
         --color-white: #ffffff;
         --color-link: #d4a57a;
         --color-title: #3e1b1b;
-        --panel-strong: linear-gradient(to right, #1f1815b0, #27191469, #41342e42, #a5857813);
-        --panel-soft: linear-gradient(to right, #201a18d8, #3a302c48, #72625a18, #a5857813);
+        --panel-strong: linear-gradient(to right, #1f1815b0, #27191469, #41342e42, #362c2834);
+        --panel-soft: linear-gradient(to right, #201a18d8, #29211d48, #72625a18, #a5857813);
         --nav-bg: linear-gradient(to right, #332419b9, #1d19168e, #3d312b18, #1a100dd7);
         --shadow-soft: 0 10px 26px #0000002b;
     }
@@ -1119,6 +1119,80 @@ body {
         object-fit: contain;
         flex-shrink: 0;
     }
+
+    /* Cole dentro do @media (min-width: 900px) */
+
+.pc-home-edu-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(196, 164, 106, 0.25);
+    border-radius: 14px;
+    padding: 16px 20px;
+    max-width: 520px;
+}
+
+.pc-home-edu-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid rgba(196, 164, 106, 0.4);
+    flex-shrink: 0;
+    background: #c4a46a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a1815;
+}
+
+.pc-home-edu-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-left: 2px solid rgba(196, 164, 106, 0.4);
+    padding-left: 16px;
+}
+
+.pc-home-edu-label {
+    font-family: var(--font-ui);
+    font-size: 9px;
+    color: #c4a46a;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pc-home-edu-title {
+    font-family: var(--font-title);
+    font-size: clamp(15px, 1.4vw, 20px);
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.pc-home-edu-uni {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 1vw, 14px);
+    color: #c4a46a;
+    font-weight: 600;
+}
+
+.pc-home-edu-course {
+    font-family: var(--font-body);
+    font-size: clamp(11px, 0.9vw, 13px);
+    color: rgba(255, 255, 255, 0.55);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pc-home-edu-dot {
+    color: #c4a46a;
+}
 
     .pc-tag-ts {
         display: inline-flex;
@@ -1724,7 +1798,7 @@ body {
 /* ---- Cards ---- */
 .pc-contact-card {
     background: rgba(26, 20, 14, 0.85);
-    border: 1px solid rgba(73, 64, 57, 0.801);
+    border: 1px solid rgba(48, 36, 27, 0.801);
     border-radius: 18px;
     padding: 28px 28px;
     display: flex;
