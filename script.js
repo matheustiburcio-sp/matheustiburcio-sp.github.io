@@ -1,6 +1,8 @@
-// === ANIMAÇÃO DE REVEAL para o layout PC (scroll-based) ===
+// ================================================================
+//  ANIMAÇÕES DE REVEAL — scroll-based (layout PC)
+// ================================================================
 (function () {
-    const pcObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -10,22 +12,26 @@
                 }
             });
         },
-        { threshold: 0.05 }
+        { threshold: 0.08 }
     );
 
-    function initPcObserver() {
+    function initAnimations() {
+        // Observa elementos com animação de scroll
         document.querySelectorAll(".animate-scroll, .animate-hero").forEach((el) => {
-            pcObserver.observe(el);
+            observer.observe(el);
         });
     }
 
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initPcObserver);
+        document.addEventListener("DOMContentLoaded", initAnimations);
     } else {
-        initPcObserver();
+        initAnimations();
     }
 })();
 
+// ================================================================
+//  LAYOUT MOBILE — navegação por seções
+// ================================================================
 const sections = ["home", "skills", "education", "contact", "projects"];
 let currentIndex = 0;
 
@@ -41,19 +47,20 @@ const navDefaults = {
     projects: { text: "(projects)", target: "projects" }
 };
 
-const backBtn = document.getElementById("backBtn");
-const homeBtn = document.getElementById("homeBtn");
-const navbar = document.getElementById("navbar");
-const btnPrev = document.getElementById("btnPrev");
-const btnNext = document.getElementById("btnNext");
-const content = document.getElementById("content");
+const backBtn  = document.getElementById("backBtn");
+const homeBtn  = document.getElementById("homeBtn");
+const navbar   = document.getElementById("navbar");
+const btnPrev  = document.getElementById("btnPrev");
+const btnNext  = document.getElementById("btnNext");
+const content  = document.getElementById("content");
+
 let isTouchScrolling = false;
 let touchStartY = 0;
 
 function resetNavLinks() {
     Object.keys(navLinks).forEach((key) => {
         const link = navLinks[key];
-        const cfg = navDefaults[key];
+        const cfg  = navDefaults[key];
         link.textContent = cfg.text;
         link.style.display = "inline";
         link.onclick = () => navigateTo(cfg.target);
@@ -64,23 +71,15 @@ function resetNavLinks() {
 
 function showSection(id) {
     const index = sections.indexOf(id);
-    if (index === -1 || index === currentIndex) {
-        return;
-    }
-
+    if (index === -1 || index === currentIndex) return;
     currentIndex = index;
     updateView(true);
 }
 
-function navigateTo(id) {
-    showSection(id);
-}
+function navigateTo(id) { showSection(id); }
 
 function nextSection() {
-    if (isTouchScrolling) {
-        return;
-    }
-
+    if (isTouchScrolling) return;
     if (currentIndex < sections.length - 1) {
         currentIndex += 1;
         updateView(true);
@@ -88,26 +87,20 @@ function nextSection() {
 }
 
 function prevSection() {
-    if (isTouchScrolling) {
-        return;
-    }
-
+    if (isTouchScrolling) return;
     if (currentIndex > 0) {
         currentIndex -= 1;
         updateView(true);
     }
 }
 
-function goBack() {
-    prevSection();
-}
+function goBack() { prevSection(); }
 
 function updateButtons() {
     btnPrev.style.display = "inline-block";
     btnNext.style.display = "inline-block";
     btnPrev.textContent = "VOLTAR";
     btnNext.textContent = "AVANÇAR";
-
     btnPrev.disabled = currentIndex === 0;
     btnNext.disabled = currentIndex === sections.length - 1;
 }
@@ -119,9 +112,7 @@ function updateNavBySection(currentId) {
     backBtn.style.display = "none";
     homeBtn.style.display = "none";
 
-    if (currentId === "home" || currentId === "skills") {
-        return;
-    }
+    if (currentId === "home" || currentId === "skills") return;
 
     if (currentId === "education") {
         backBtn.style.display = "block";
@@ -157,7 +148,6 @@ function updateView(animate) {
     const activeSection = document.getElementById(currentId);
     if (activeSection) {
         activeSection.classList.add("active");
-
         if (animate) {
             activeSection.classList.add("entering");
             window.setTimeout(() => {
@@ -172,122 +162,114 @@ function updateView(animate) {
 }
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        nextSection();
-    }
-
-    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        prevSection();
-    }
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") nextSection();
+    if (event.key === "ArrowLeft"  || event.key === "ArrowUp")   prevSection();
 });
 
-content.addEventListener(
-    "touchstart",
-    (event) => {
-        touchStartY = event.changedTouches[0].screenY;
-        isTouchScrolling = false;
-    },
-    { passive: true }
-);
+content.addEventListener("touchstart", (event) => {
+    touchStartY = event.changedTouches[0].screenY;
+    isTouchScrolling = false;
+}, { passive: true });
 
-content.addEventListener(
-    "touchmove",
-    (event) => {
-        const touchY = event.changedTouches[0].screenY;
-        if (Math.abs(touchStartY - touchY) > 8) {
-            isTouchScrolling = true;
-        }
-    },
-    { passive: true }
-);
+content.addEventListener("touchmove", (event) => {
+    const touchY = event.changedTouches[0].screenY;
+    if (Math.abs(touchStartY - touchY) > 8) isTouchScrolling = true;
+}, { passive: true });
 
-content.addEventListener(
-    "touchend",
-    () => {
-        window.setTimeout(() => {
-            isTouchScrolling = false;
-        }, 140);
-    },
-    { passive: true }
-);
+content.addEventListener("touchend", () => {
+    window.setTimeout(() => { isTouchScrolling = false; }, 140);
+}, { passive: true });
 
 updateView(false);
+
+// ================================================================
+//  SCROLL SPY PC — marca link ativo na navbar conforme a seção
+// ================================================================
 function initPCScrollSpy() {
-    const sections = document.querySelectorAll('.pc-section[id]');
-    const navLinks = document.querySelectorAll('.pc-navbar-links a');
- 
-    if (!sections.length || !navLinks.length) return;
- 
-    const observer = new IntersectionObserver(
+    const pcSections = document.querySelectorAll(".pc-section[id]");
+    const pcNavLinks = document.querySelectorAll(".pc-navbar-links a");
+
+    if (!pcSections.length || !pcNavLinks.length) return;
+
+    const spyObserver = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const id = entry.target.id;
-                    navLinks.forEach((link) => {
-                        const href = link.getAttribute('href');
-                        link.classList.toggle('active', href === `#${id}`);
+                    pcNavLinks.forEach((link) => {
+                        link.classList.toggle(
+                            "active",
+                            link.getAttribute("href") === `#${id}`
+                        );
                     });
                 }
             });
         },
-        {
-            root: null,
-            // Dispara quando a seção ocupa pelo menos 40% da tela
-            threshold: 0.4,
-        }
+        { root: null, threshold: 0.25 }
     );
- 
-    sections.forEach((section) => observer.observe(section));
+
+    pcSections.forEach((section) => spyObserver.observe(section));
 }
- 
-/* ----------------------------------------------------------------
-   PARTE B — Mobile (ativa o link ao clicar na nav)
-   O site mobile já usa JS para trocar seções, então
-   basta marcar .active no link clicado
----------------------------------------------------------------- */
+
+// ================================================================
+//  NAV MOBILE — marca link ativo ao clicar
+// ================================================================
 function initMobileNavActive() {
-    const navLinks = document.querySelectorAll('.top-nav a');
- 
-    navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-            navLinks.forEach((l) => l.classList.remove('active'));
-            link.classList.add('active');
+    const mobileLinks = document.querySelectorAll(".top-nav a");
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            mobileLinks.forEach((l) => l.classList.remove("active"));
+            link.classList.add("active");
         });
     });
- 
-    // Marca "Inicio" como ativo por padrão ao carregar
-    const homeLink = document.querySelector('.top-nav a[href="#home"]');
-    if (homeLink) homeLink.classList.add('active');
+    const homeLink = document.querySelector(".top-nav a[href='#home']");
+    if (homeLink) homeLink.classList.add("active");
 }
- 
-/* ----------------------------------------------------------------
-   PARTE C — Navbar PC com blur suave ao rolar
-   Aumenta opacidade do backdrop quando a página não está no topo
----------------------------------------------------------------- */
+
+// ================================================================
+//  NAVBAR PC — blur ao rolar
+// ================================================================
 function initNavbarScroll() {
-    const navbar = document.querySelector('.pc-navbar');
-    if (!navbar) return;
- 
+    const nav = document.querySelector(".pc-navbar");
+    if (!nav) return;
+
     const handleScroll = () => {
         if (window.scrollY > 60) {
-            navbar.style.backdropFilter = 'blur(14px)';
-            navbar.style.background = 'linear-gradient(to right, #332419e8, #1d1916cc, #3d312b40, #a58578cc)';
+            nav.style.backdropFilter = "blur(14px)";
+            nav.style.background =
+                "linear-gradient(to right, #332419e8, #1d1916cc, #3d312b40, #a58578cc)";
         } else {
-            navbar.style.backdropFilter = 'blur(8px)';
-            navbar.style.background = 'var(--nav-bg)';
+            nav.style.backdropFilter = "blur(8px)";
+            nav.style.background = "var(--nav-bg)";
         }
     };
- 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // chama uma vez ao carregar
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 }
- 
-/* ----------------------------------------------------------------
-   INICIALIZAÇÃO
-   Roda quando o DOM estiver pronto
----------------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', () => {
+
+// ================================================================
+//  HERO PC — garante que a seção hero entra visível imediatamente
+// ================================================================
+function initHeroVisibility() {
+    const hero = document.getElementById("pc-hero");
+    if (!hero) return;
+
+    // O hero já está na viewport ao carregar — marca como visível
+    // após um frame para garantir que a transição CSS dispara
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            hero.classList.add("visible");
+        });
+    });
+}
+
+// ================================================================
+//  INICIALIZAÇÃO
+// ================================================================
+document.addEventListener("DOMContentLoaded", () => {
     initPCScrollSpy();
     initMobileNavActive();
     initNavbarScroll();
+    initHeroVisibility();
 });

@@ -889,11 +889,17 @@ body {
     }
 
     .animate-scroll,
-    .animate-hero {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 1000ms ease-out, transform 1000ms ease-out;
-    }
+.animate-hero {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 800ms ease-out, transform 800ms ease-out;
+}
+
+.animate-scroll.visible,
+.animate-hero.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
     .animate-scroll.visible,
     .animate-hero.visible {
